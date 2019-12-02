@@ -98,12 +98,12 @@ namespace System.Urn
         /// <summary>
         ///     The resolution parameters
         /// </summary>
-        public IDictionary<string, string> Resolution { get; } = new Dictionary<string, string>();
+        public IReadOnlyDictionary<string, string> Resolution { get; protected set; } = new Dictionary<string, string>();
 
         /// <summary>
         ///     The query parameters
         /// </summary>
-        public IDictionary<string, string> Query { get; } = new Dictionary<string, string>();
+        public IReadOnlyDictionary<string, string> Query { get; protected set; } = new Dictionary<string, string>();
 
         /// <summary>
         ///     Gets an array containing the path segments that make up the specified URN
@@ -242,9 +242,9 @@ namespace System.Urn
             return str.Substring(startIndex + startDelimiter.Length);
         }
 
-        private IDictionary<string, string> Parse(string component)
+        private IReadOnlyDictionary<string, string> Parse(string component)
         {
-            IDictionary<string, string> parameters = new Dictionary<string, string>();
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
             if (string.IsNullOrWhiteSpace(component))
             {
                 return parameters;
@@ -261,76 +261,77 @@ namespace System.Urn
             return parameters;
         }
 
-        private IDictionary<string, string> GetResolutions(string rqfComponents)
+        private IReadOnlyDictionary<string, string> GetResolutions(string rqfComponents)
         {
             var rComponent = SubstringUntil(SubstringFrom(rqfComponents, "?+"), "?=", "#");
             return Parse(rComponent);
         }
 
-        private IDictionary<string, string> GetQueries(string rqfComponents)
+        private IReadOnlyDictionary<string, string> GetQueries(string rqfComponents)
         {
             var rComponent = SubstringUntil(SubstringFrom(rqfComponents, "?="), "#");
             ;
             return Parse(rComponent);
         }
 
-        private string ToResolutionString(IDictionary<string, string> resolutions)
+        private string ToResolutionString(IReadOnlyDictionary<string, string> resolutions)
         {
             var sb = new StringBuilder();
             if (resolutions.Count != 0)
             {
+                bool first = true;
                 sb.Append("?+");
                 foreach (var kv in resolutions)
                 {
-                    sb.Append(kv.Key).Append('=').Append(kv.Value);
+                    if (!first)
+                    {
+                        sb.Append("&");
+                    }
+
+                    sb.Append(kv.Key);
+                    if (!string.IsNullOrWhiteSpace(kv.Value))
+                        sb.Append('=').Append(kv.Value);
+                    first = false;
                 }
             }
 
             return sb.ToString();
         }
 
-        private string ToQueryString(IDictionary<string, string> query)
+        private string ToQueryString(IReadOnlyDictionary<string, string> query)
         {
             var sb = new StringBuilder();
             if (query.Count != 0)
             {
+                bool first = true;
                 sb.Append("?=");
                 foreach (var kv in query)
                 {
-                    sb.Append(kv.Key).Append('=').Append(kv.Value);
+                    if (!first)
+                    {
+                        sb.Append("&");
+                    }
+
+                    sb.Append(kv.Key);
+                    if (!string.IsNullOrWhiteSpace(kv.Value))
+                        sb.Append('=').Append(kv.Value);
+                    first = false;
                 }
             }
 
             return sb.ToString();
         }
 
-        private string ToString(IDictionary<string, string> resolutions, IDictionary<string, string> queries,
+        private string ToString(IReadOnlyDictionary<string, string> resolutions, IReadOnlyDictionary<string, string> queries,
             string fragment)
         {
             var sb = new StringBuilder();
-            if (resolutions.Count != 0)
-            {
-                sb.Append("?+");
-                foreach (var kv in resolutions)
-                {
-                    sb.Append(kv.Key).Append('=').Append(kv.Value);
-                }
-            }
-
-            if (queries.Count != 0)
-            {
-                sb.Append("?=");
-                foreach (var kv in queries)
-                {
-                    sb.Append(kv.Key).Append('=').Append(kv.Value);
-                }
-            }
-
+            sb.Append(ToResolutionString(resolutions))
+              .Append(ToQueryString(queries));
             if (!string.IsNullOrWhiteSpace(fragment))
             {
                 sb.Append('#').Append(fragment);
             }
-
             return sb.ToString();
         }
     }
