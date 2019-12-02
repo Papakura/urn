@@ -2,10 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Michael Rushton</Authors>
+    <Company>Michael Rushton Ltd</Company>
+    <Description>Library for representing, parsing and encoding URNs as specified in [RFC 8141].</Description>
+    <Copyright>Michael Rushton Ltd 2019</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/Papakura/urn</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>URN, RFC8141, RFC 8141</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\%(Configuration)\netstandard2.0\System.Urn.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

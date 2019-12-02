@@ -8,6 +8,8 @@ namespace System.Urn
     public class NamespaceIdentifier : IEquatable<NamespaceIdentifier>
     {
         private readonly Regex _allowed = new Regex("^[0-9a-z][0-9a-z-]{0,30}[0-9a-z]$", RegexOptions.IgnoreCase);
+        private readonly Regex _formalExclusionNID = new Regex("^([a-z]{2}-{1,2}|X-).*", RegexOptions.IgnoreCase);
+        private readonly Regex _informalNID        = new Regex("^(urn-[1-9][0-9]*).*", RegexOptions.IgnoreCase);
         private readonly string _nid;
 
         /// <summary>
@@ -39,6 +41,18 @@ namespace System.Urn
 
             _nid = nid;
         }
+
+        /// <summary>
+        /// Return whether the NID is considered formal according to sections 5.1 and 5.2
+        /// of RFC 8141.
+        /// </summary>
+        public bool Formal => !_formalExclusionNID.IsMatch(_nid) && !Informal;
+
+        /// <summary>
+        /// Return whether the NID is considered informal according to sections 5.1 and 5.2
+        /// of RFC 8141.
+        /// </summary>
+        public bool Informal => _informalNID.IsMatch(_nid);
 
         /// <inheritdoc />
         public bool Equals(NamespaceIdentifier other)

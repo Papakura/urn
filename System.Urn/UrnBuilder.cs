@@ -56,6 +56,44 @@ namespace System.Urn
 
         }
 
-        
+        /// <summary>
+        /// Add a query parameter
+        /// </summary>
+        /// <exception cref="ArgumentException">If key already exists</exception>
+        public UrnBuilder AddQuery(KeyValuePair<string, string> kvp)
+        {
+            _urn.AddQuery(kvp);
+            return this;
+        }
+
+        /// <summary>
+        /// Remove a query parameter
+        /// </summary>
+        public UrnBuilder RemoveQuery(string key)
+        {
+            _urn.RemoveQuery(key);
+            return this;
+        }
+
+        /// <summary>
+        /// Add a resolution parameter
+        /// </summary>
+        /// <exception cref="ArgumentException">If key already exists</exception>
+        public UrnBuilder AddResolution(KeyValuePair<string, string> kvp)
+        {
+            _urn.AddResolution(kvp);
+            return this;
+        }
+
+        /// <summary>
+        /// Remove a query parameter
+        /// </summary>
+        public UrnBuilder RemoveResolution(string key)
+        {
+            _urn.RemoveResolution(key);
+            return this;
+        }
+
+
     }
 }

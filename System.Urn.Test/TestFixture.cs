@@ -49,7 +49,7 @@ namespace System.Urn.Test
 
         private static IEnumerable<string> Query
         {
-            get { yield return "urn:isbn:123?+resolution?=query=x"; }
+            get { yield return "urn:isbn:123?+resolution=x?=query=x"; }
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace System.Urn.Test
         [Test]
         public void TestInvalidNid([ValueSource(nameof(InvalidNid))] string text)
         {
-            Assert.Throws<FormatException>(() =>
+            Assert.Throws<UriFormatException>(() =>
             {
                 var urn = new Urn(text);
             });
@@ -81,7 +81,7 @@ namespace System.Urn.Test
         [Test]
         public void TestInvalidNss([ValueSource(nameof(InvalidNss))] string text)
         {
-            Assert.Throws<FormatException>(() =>
+            Assert.Throws<UriFormatException>(() =>
             {
                 var urn = new Urn(text);
             });
@@ -112,6 +112,17 @@ namespace System.Urn.Test
             {
                 var urn = new Urn(text);
             });
+        }
+
+        [Test]
+        public void TestUrnBuilder([ValueSource(nameof(Query))]string text)
+        {
+            UrnBuilder builder = new UrnBuilder(text,UriFormat.UriEscaped);
+            builder.Fragment = "Fragment";
+            var result = builder.Urn.ToString();
+            result.Should().Contain("#Fragment");
+            builder.AddQuery(new KeyValuePair<string, string>("key", "value"));
+            builder.Urn.ToString().Should().Contain("?=query=x&key=value");
         }
     }
 }
