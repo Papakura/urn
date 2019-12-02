@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Urn", "System.Urn\System.Urn.csproj", "{F72C9CC5-6896-46D8-817B-84F4FC80A876}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Urn", "System.Urn\System.Urn.csproj", "{F72C9CC5-6896-46D8-817B-84F4FC80A876}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Urn.Test", "System.Urn.Test\System.Urn.Test.csproj", "{8B56A5E2-4384-4530-AC36-3480EE761CCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Urn.Test", "System.Urn.Test\System.Urn.Test.csproj", "{8B56A5E2-4384-4530-AC36-3480EE761CCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,18 +17,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Debug|x64.Build.0 = Debug|Any CPU
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Debug|x86.Build.0 = Debug|Any CPU
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Release|x64.ActiveCfg = Release|Any CPU
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Release|x64.Build.0 = Release|Any CPU
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Release|x86.ActiveCfg = Release|Any CPU
-		{CEE6C23F-9AAC-4D8B-9634-5C29D1C1EA15}.Release|x86.Build.0 = Release|Any CPU
 		{F72C9CC5-6896-46D8-817B-84F4FC80A876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F72C9CC5-6896-46D8-817B-84F4FC80A876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F72C9CC5-6896-46D8-817B-84F4FC80A876}.Debug|x64.ActiveCfg = Debug|Any CPU
